@@ -3,602 +3,443 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arsip Data Siswa - SMPN 156 Jakarta</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-  
-  <style>
-    :root {
-      --bg-gradient: linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%);
-      --card-bg: #ffffff;
-      --primary-skyblue: #0284c7;
-      --primary-hover: #0369a1;
-      --accent-cyan: #06b6d4;
-      --text-main: #0f172a;
-      --text-muted: #475569;
-      --border-color: #cbd5e1;
+  <title>Portal Kesiswaan - SMP Negeri 156 Jakarta</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: '#0A192F',
+            primary: '#1E3A8A',
+            secondary: '#3B82F6',
+            accent: '#F59E0B',
+            softbg: '#F8FAFC'
+          }
+        }
+      }
     }
-
-    body {
-      background: var(--bg-gradient);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      color: var(--text-main);
-      min-height: 100vh;
-    }
-
-    .login-container { max-width: 440px; margin: 80px auto; }
-
-    .custom-card {
-      background: var(--card-bg);
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      border-radius: 24px;
-      box-shadow: 0 15px 35px rgba(2, 132, 199, 0.08), 0 5px 15px rgba(0, 0, 0, 0.04);
-    }
-
-    .brand-icon {
-      width: 70px;
-      height: 70px;
-      background: linear-gradient(135deg, #e0f2fe, #bae6fd);
-      color: var(--primary-skyblue);
-      border-radius: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.2rem;
-      margin: 0 auto 1.25rem auto;
-      box-shadow: 0 8px 20px rgba(2, 132, 199, 0.15);
-    }
-
-    .input-group-text {
-      background-color: #f8fafc !important;
-      border: 1.5px solid var(--border-color) !important;
-      border-right: none !important;
-      color: var(--primary-skyblue) !important;
-      font-size: 1.2rem !important;
-    }
-
-    .form-control, .form-select {
-      background-color: #ffffff !important;
-      border: 1.5px solid var(--border-color) !important;
-      color: var(--text-main) !important;
-      font-weight: 500;
-    }
-
-    .form-control::placeholder {
-      color: #94a3b8 !important;
-      font-weight: 400;
-    }
-
-    .form-control:focus, .form-select:focus {
-      border-color: var(--primary-skyblue) !important;
-      box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.18) !important;
-    }
-
-    .btn-toggle-pwd {
-      background: #f8fafc !important;
-      border: 1.5px solid var(--border-color) !important;
-      border-left: none !important;
-      color: var(--primary-skyblue) !important;
-    }
-
-    .btn-skyblue {
-      background: linear-gradient(135deg, #0284c7 0%, #06b6d4 100%);
-      color: #ffffff;
-      border: none;
-      transition: all 0.3s ease;
-    }
-
-    .btn-skyblue:hover {
-      background: linear-gradient(135deg, #0369a1 0%, #0891b2 100%);
-      color: #ffffff;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(2, 132, 199, 0.3);
-    }
-
-    .strength-meter {
-      height: 6px;
-      width: 100%;
-      background: #e2e8f0;
-      border-radius: 10px;
-      margin-top: 8px;
-      overflow: hidden;
-    }
-
-    .strength-bar {
-      height: 100%;
-      width: 0%;
-      transition: all 0.3s ease;
-    }
-
-    .navbar-custom {
-      background: #ffffff;
-      border-bottom: 1px solid rgba(2, 132, 199, 0.1);
-      padding: 1rem 0;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-    }
-
-    .stat-card {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 18px;
-      padding: 1.25rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-    }
-
-    .table-custom {
-      color: var(--text-main);
-    }
-
-    .table-custom th {
-      background-color: #e0f2fe;
-      color: var(--primary-skyblue);
-      font-weight: 700;
-      border-bottom: 2px solid #bae6fd;
-      padding: 14px;
-    }
-
-    .table-custom tbody tr {
-      border-bottom: 1px solid #f1f5f9;
-    }
-
-    .table-custom tbody tr:hover {
-      background-color: #f0f9ff;
-    }
-
-    .btn-action {
-      border-radius: 8px;
-      font-size: 0.82rem;
-      padding: 6px 12px;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-    }
-
-    /* CUSTOM MODAL BIODATA (Aplikasi Style + Animasi Smooth) */
-    .modal-content-custom {
-      border: none;
-      border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(2, 132, 199, 0.15);
-      background: #ffffff;
-      overflow: hidden;
-    }
-
-    .modal.fade .modal-dialog-animated {
-      transform: scale(0.9);
-      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    .modal.show .modal-dialog-animated {
-      transform: scale(1);
-    }
-
-    .modal-header-custom {
-      background: linear-gradient(135deg, #0284c7 0%, #06b6d4 100%);
-      color: white;
-      padding: 1.25rem 1.5rem;
-      border: none;
-    }
-
-    .biodata-item {
-      background: #f8fafc;
-      border-radius: 12px;
-      padding: 10px 14px;
-      border: 1px solid #e2e8f0;
-      height: 100%;
-    }
-  </style>
+  </script>
+  <!-- Remix Icon CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-softbg text-slate-800 font-sans flex flex-col min-h-screen">
 
-  <!-- LOGIN SECTION -->
-  <div id="sectionLogin" class="container">
-    <div class="login-container">
-      <div class="custom-card p-4 p-md-5 text-center">
-        <div class="brand-icon"><i class="bi bi-shield-lock-fill"></i></div>
-        <h4 class="fw-bold mb-1" style="color: var(--text-main);">Arsip Digital Siswa</h4>
-        <p class="text-muted small mb-4">SMP Negeri 156 Jakarta</p>
-        
-        <div id="alertLogin" class="alert alert-danger py-2 fs-6 d-none"></div>
+  <!-- CONFIGURATION: Masukkan URL Web App Google Apps Script Anda di sini -->
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycby1C9iLInYEL8hwumYV_cq2KsEOZ9lRb3_xrtxhBCxmldIyosc_7JB_GQGys9welZNpNw/exec"; 
+  </script>
 
-        <form id="formLogin" onsubmit="event.preventDefault(); handleLogin();">
-          <div class="text-start mb-3">
-            <label class="form-label small fw-semibold">Username</label>
-            <div class="input-group">
-              <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
-              <input type="text" id="inputUsername" class="form-control" placeholder="Masukkan username" required>
+  <!-- HEADER & NAVIGATION -->
+  <header class="bg-navy text-white sticky top-0 z-40 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <!-- Logo & Nama Sekolah -->
+        <div class="flex items-center space-x-3">
+          <div class="w-12 h-12 bg-accent text-navy font-extrabold flex items-center justify-center rounded-full text-lg shadow-md">
+            156
+          </div>
+          <div>
+            <h1 class="font-bold text-lg leading-tight tracking-wide">SMP NEGERI 156 JAKARTA</h1>
+            <p class="text-xs text-blue-200">Portal Resmi Bidang Kesiswaan</p>
+          </div>
+        </div>
+
+        <!-- Desktop Navigation Menu -->
+        <nav id="public-nav" class="hidden md:flex items-center space-x-6 text-sm font-medium">
+          <a href="#beranda" class="hover:text-accent transition-colors">Beranda</a>
+          <a href="#eskul" class="hover:text-accent transition-colors">Ekstrakurikuler</a>
+          <a href="#prestasi" class="hover:text-accent transition-colors">Prestasi</a>
+          <a href="#kontak" class="hover:text-accent transition-colors">Kontak</a>
+        </nav>
+
+        <!-- Action Button Login / User Info -->
+        <div class="flex items-center space-x-3">
+          <div id="auth-action-container">
+            <button onclick="toggleLoginModal(true)" class="bg-accent hover:bg-yellow-500 text-navy font-bold px-4 py-2 rounded-lg text-sm shadow transition-all flex items-center space-x-2">
+              <i class="ri-lock-line"></i>
+              <span>Login Sistem</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-grow">
+    
+    <!-- VIEW 1: HALAMAN PUBLIK (BERANDA & ESKUL) -->
+    <div id="view-public">
+      <!-- HERO SECTION -->
+      <section id="beranda" class="bg-gradient-to-r from-navy via-primary to-blue-900 text-white py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <span class="bg-accent/20 text-accent font-semibold px-3 py-1 rounded-full text-xs uppercase tracking-wider">Karakter & Prestasi</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold mt-3 leading-tight">Mewujudkan Generasi Unggul, Berbudaya, dan Berprestasi</h2>
+            <p class="mt-4 text-blue-100 text-sm leading-relaxed">
+              Selamat datang di Portal Kesiswaan SMPN 156 Jakarta. Pusat informasi kegiatan ekstrakurikuler, organisasi siswa, serta dokumentasi prestasi peserta didik.
+            </p>
+            <div class="mt-6 flex flex-wrap gap-4">
+              <a href="#eskul" class="bg-white text-navy font-bold px-5 py-2.5 rounded-lg text-sm shadow hover:bg-slate-100 transition">Jelajahi Eskul</a>
+              <button onclick="checkProtectedAccess()" class="border border-white/40 text-white font-semibold px-5 py-2.5 rounded-lg text-sm hover:bg-white/10 transition">Dashboard Internal</button>
             </div>
           </div>
-
-          <div class="text-start mb-4">
-            <label class="form-label small fw-semibold">Password</label>
-            <div class="input-group">
-              <span class="input-group-text"><i class="bi bi-key-fill"></i></span>
-              <input type="password" id="inputPassword" class="form-control" placeholder="Masukkan password" oninput="checkStrength(this.value)" required>
-              <button class="btn btn-toggle-pwd" type="button" onclick="togglePasswordVisibility()">
-                <i class="bi bi-eye-fill" id="toggleIcon"></i>
-              </button>
-            </div>
-            
-            <div class="strength-meter">
-              <div id="strengthBar" class="strength-bar"></div>
-            </div>
-            <div class="d-flex justify-content-between mt-1">
-              <span class="text-muted" style="font-size: 0.75rem;">Kekuatan Password:</span>
-              <small id="strengthLabel" class="fw-bold" style="font-size: 0.75rem; color: #64748b;">-</small>
+          <div class="hidden md:block">
+            <div class="bg-white/10 p-6 rounded-2xl backdrop-blur-sm border border-white/20 text-center">
+              <i class="ri-shield-user-line text-6xl text-accent"></i>
+              <h3 class="font-bold text-lg mt-3">Sistem Terintegrasi</h3>
+              <p class="text-xs text-blue-200 mt-1">Akses arsip data siswa dan manajemen galeri berbasis peran (RBAC).</p>
             </div>
           </div>
+        </div>
+      </section>
 
-          <button type="submit" id="btnLogin" class="btn btn-skyblue w-100 py-2.5 rounded-3 fw-semibold">
-            <span id="btnText">Masuk Sekarang</span>
-            <span id="btnSpinner" class="spinner-border spinner-border-sm ms-2 d-none"></span>
+      <!-- EKSTRAKURIKULER SECTION -->
+      <section id="eskul" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="text-center mb-10">
+          <h2 class="text-2xl font-bold text-navy">Ekstrakurikuler Sekolah</h2>
+          <p class="text-sm text-slate-500 mt-1">Wadah pengembangan bakat dan minat siswa SMPN 156 Jakarta</p>
+        </div>
+        <div id="eskul-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Data akan dimuat otomatis via JavaScript dari Google Sheets -->
+          <div class="bg-white p-6 rounded-xl shadow border col-span-3 text-center text-slate-500">
+            Memuat data ekstrakurikuler...
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- VIEW 2: DASHBOARD TERPROTEKSI (ARSIP SISWA & UPLOAD) -->
+    <div id="view-dashboard" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="flex justify-between items-center mb-6 bg-white p-4 rounded-xl shadow-sm border">
+        <div>
+          <h2 id="dash-title" class="text-xl font-bold text-navy">Dashboard Internal Kesiswaan</h2>
+          <p id="dash-subtitle" class="text-xs text-slate-500">Selamat datang, Administrator</p>
+        </div>
+        <button onclick="handleLogout()" class="bg-red-50 hover:bg-red-100 text-red-600 font-semibold px-4 py-2 rounded-lg text-xs transition flex items-center space-x-1">
+          <i class="ri-logout-box-line"></i>
+          <span>Keluar (Logout)</span>
+        </button>
+      </div>
+
+      <!-- PANEL KHUSUS GURU KESISWAAN / ADMIN (ARSIP SISWA) -->
+      <div id="panel-arsip" class="hidden space-y-4">
+        <div class="bg-white p-6 rounded-xl shadow border">
+          <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
+            <h3 class="font-bold text-lg text-navy flex items-center space-x-2">
+              <i class="ri-folder-user-line text-primary"></i>
+              <span>Database Arsip Siswa & Dokumen Penting</span>
+            </h3>
+            <input type="text" id="search-siswa" placeholder="Cari nama atau NISN..." onkeyup="filterSiswa()" class="border border-slate-300 rounded-lg px-3 py-2 text-xs w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-primary">
+          </div>
+          
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr class="bg-slate-100 text-slate-700 border-b">
+                  <th class="p-3">Kelas</th>
+                  <th class="p-3">Nama Lengkap</th>
+                  <th class="p-3">NISN</th>
+                  <th class="p-3">TTL</th>
+                  <th class="p-3">No. HP</th>
+                  <th class="p-3 text-center">Arsip KK</th>
+                  <th class="p-3 text-center">Ijazah</th>
+                  <th class="p-3 text-center">Akte</th>
+                </tr>
+              </thead>
+              <tbody id="student-table-body">
+                <tr>
+                  <td colspan="8" class="p-4 text-center text-slate-400">Memuat data arsip siswa...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL KHUSUS PEMBINA ESKUL / OSIS (UPLOAD GALERI) -->
+      <div id="panel-upload" class="hidden bg-white p-6 rounded-xl shadow border max-w-xl mx-auto">
+        <h3 class="font-bold text-lg text-navy mb-4 flex items-center space-x-2">
+          <i class="ri-image-add-line text-primary"></i>
+          <span>Upload Dokumentasi Kegiatan Eskul</span>
+        </h3>
+        <form onsubmit="handleUploadSubmit(event)" class="space-y-4 text-xs">
+          <div>
+            <label class="block font-semibold text-slate-600 mb-1">Judul Kegiatan</label>
+            <input type="text" required class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:outline-none">
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-600 mb-1">Kategori Ekstrakurikuler</label>
+            <select class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:outline-none">
+              <option>Pramuka</option>
+              <option>Bola Basket</option>
+              <option>Paskibra</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-600 mb-1">File Foto Kegiatan</label>
+            <input type="file" accept="image/*" required class="w-full border rounded-lg px-2 py-1.5 bg-slate-50">
+          </div>
+          <button type="submit" class="w-full bg-primary hover:bg-blue-900 text-white font-bold py-2.5 rounded-lg transition">
+            Unggah Foto
           </button>
         </form>
       </div>
+
+    </div>
+  </main>
+
+  <!-- MODAL LOGIN SYSTEM -->
+  <div id="login-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden">
+      <div class="bg-navy p-6 text-white text-center relative">
+        <button onclick="toggleLoginModal(false)" class="absolute top-4 right-4 text-white/70 hover:text-white">
+          <i class="ri-close-line text-2xl"></i>
+        </button>
+        <h3 class="text-xl font-bold">Login Sistem Kesiswaan</h3>
+        <p class="text-xs text-blue-200 mt-1">SMP Negeri 156 Jakarta</p>
+      </div>
+      <form id="login-form" class="p-6 space-y-4" onsubmit="handleLogin(event)">
+        <div id="alert-message" class="hidden bg-amber-50 border border-amber-200 text-amber-800 text-xs p-3 rounded-lg">
+          Silakan login untuk mengakses halaman ini.
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 mb-1">Username / Email</label>
+          <input type="text" id="login-username" required class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 mb-1">Password</label>
+          <input type="password" id="login-password" required class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+        </div>
+        <button type="submit" id="login-btn" class="w-full bg-primary hover:bg-blue-900 text-white font-bold py-2.5 rounded-lg text-sm transition">
+          Masuk ke Sistem
+        </button>
+      </form>
     </div>
   </div>
 
-  <!-- DASHBOARD SECTION -->
-  <div id="sectionDashboard" class="d-none">
-    <nav class="navbar-custom mb-4">
-      <div class="container d-flex justify-content-between align-items-center">
-        <div class="d-flex align-items-center gap-3">
-          <div class="p-2.5 rounded-3 text-white" style="background: linear-gradient(135deg, #0284c7, #06b6d4);"><i class="bi bi-folder-check fs-4"></i></div>
-          <div>
-            <h5 class="mb-0 fw-bold" style="color: var(--text-main);">ARSIP DIGITAL DATA SISWA</h5>
-            <small class="text-muted"><i class="bi bi-geo-alt"></i> SMP Negeri 156 Jakarta</small>
-          </div>
-        </div>
-        <div class="d-flex align-items-center gap-3">
-          <span class="badge fs-6 px-3 py-2 rounded-pill text-white" style="background: var(--primary-skyblue);" id="labelKelas">Kelas -</span>
-          <div class="text-end d-none d-md-block">
-            <div class="fw-semibold fs-6" style="color: var(--text-main);" id="labelNamaWalas">-</div>
-            <small class="text-muted" id="labelRole">Wali Kelas</small>
-          </div>
-          <button class="btn btn-outline-secondary btn-sm ms-2 rounded-3" onclick="location.reload()"><i class="bi bi-box-arrow-right"></i> Keluar</button>
-        </div>
-      </div>
-    </nav>
-
-    <div class="container pb-5">
-      <div class="row g-3 mb-4">
-        <div class="col-md-4">
-          <div class="stat-card d-flex align-items-center gap-3">
-            <div class="p-3 rounded-3" style="background: #e0f2fe; color: #0284c7;"><i class="bi bi-people-fill fs-3"></i></div>
-            <div><div class="text-muted small">Total Siswa</div><h3 class="mb-0 fw-bold" id="statTotalSiswa">0</h3></div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="stat-card d-flex align-items-center gap-3">
-            <div class="p-3 rounded-3" style="background: #cff4fc; color: #055160;"><i class="bi bi-file-earmark-check-fill fs-3"></i></div>
-            <div><div class="text-muted small">Berkas KK Terisi</div><h3 class="mb-0 fw-bold text-info" id="statTotalKK">0</h3></div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="stat-card d-flex align-items-center gap-3">
-            <div class="p-3 rounded-3" style="background: #d1e7dd; color: #0f5132;"><i class="bi bi-award-fill fs-3"></i></div>
-            <div><div class="text-muted small">Berkas Ijazah Terisi</div><h3 class="mb-0 fw-bold text-success" id="statTotalIjazah">0</h3></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="custom-card p-4">
-        <div class="row g-3 justify-content-between align-items-center mb-4">
-          <div class="col-md-5">
-            <div class="position-relative">
-              <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3" style="color: var(--primary-skyblue);"></i>
-              <input type="text" id="searchInput" class="form-control rounded-3 ps-5" placeholder="Cari nama siswa, NIS, atau NIK...">
-            </div>
-          </div>
-          <div class="col-md-7 d-flex gap-2 justify-content-md-end">
-            <select id="filterKelasAdmin" class="form-select rounded-3 d-none" style="width: 170px;" onchange="fetchDataSiswa()">
-              <option value="ALL">Semua Kelas</option>
-              <option value="7A">Kelas 7A</option><option value="7B">Kelas 7B</option><option value="7C">Kelas 7C</option>
-              <option value="7D">Kelas 7D</option><option value="7E">Kelas 7E</option><option value="7F">Kelas 7F</option><option value="7G">Kelas 7G</option>
-              <option value="8A">Kelas 8A</option><option value="8B">Kelas 8B</option><option value="8C">Kelas 8C</option>
-              <option value="8D">Kelas 8D</option><option value="8E">Kelas 8E</option><option value="8F">Kelas 8F</option><option value="8G">Kelas 8G</option>
-              <option value="9A">Kelas 9A</option><option value="9B">Kelas 9B</option><option value="9C">Kelas 9C</option>
-              <option value="9D">Kelas 9D</option><option value="9E">Kelas 9E</option><option value="9F">Kelas 9F</option><option value="9G">Kelas 9G</option>
-            </select>
-            <select id="filterGender" class="form-select rounded-3" style="width: 160px;">
-              <option value="ALL">Semua Gender</option>
-              <option value="L">Laki-laki (L)</option>
-              <option value="P">Perempuan (P)</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="table-responsive">
-          <table class="table table-custom align-middle mb-0">
-            <thead>
-              <tr>
-                <th width="5%" class="text-center">No</th>
-                <th width="8%" class="text-center">Kelas</th>
-                <th width="25%">Nama Siswa</th>
-                <th width="22%">NIS / NISN</th>
-                <th width="8%" class="text-center">L/P</th>
-                <th width="12%" class="text-center">Biodata</th>
-                <th width="20%" class="text-center">Dokumen Digital</th>
-              </tr>
-            </thead>
-            <tbody id="tabelBody"></tbody>
-          </table>
-          <div id="noDataAlert" class="text-center py-5 d-none">
-            <i class="bi bi-search text-muted display-4"></i>
-            <p class="text-muted mt-2">Data siswa tidak ditemukan.</p>
-          </div>
-        </div>
-      </div>
+  <!-- FOOTER -->
+  <footer class="bg-navy text-white text-xs py-8 border-t border-slate-800 mt-12">
+    <div class="max-w-7xl mx-auto px-4 text-center space-y-2">
+      <p class="font-semibold text-slate-300">SMP Negeri 156 Jakarta &copy; 2026</p>
+      <p class="text-slate-500">Jl. Percetakan Negara XI No.22, Johar Baru, Jakarta Pusat</p>
     </div>
-  </div>
+  </footer>
 
-  <!-- MODAL BIODATA LENGKAP -->
-  <div class="modal fade" id="modalBiodata" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-animated">
-      <div class="modal-content modal-content-custom">
-        <div class="modal-header modal-header-custom align-items-center">
-          <div class="d-flex align-items-center gap-2">
-            <i class="bi bi-person-badge-fill fs-4"></i>
-            <h5 class="modal-title fw-bold" id="modalNamaSiswa">Detail Biodata Siswa</h5>
-          </div>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body p-4">
-          <div class="row g-3">
-            <!-- NIK -->
-            <div class="col-md-6">
-              <div class="biodata-item">
-                <small class="text-muted d-block mb-1"><i class="bi bi-card-text text-primary me-1"></i> NIK</small>
-                <div class="fw-bold fs-6" id="modalNik">-</div>
-              </div>
-            </div>
-            <!-- TTL -->
-            <div class="col-md-6">
-              <div class="biodata-item">
-                <small class="text-muted d-block mb-1"><i class="bi bi-calendar-event text-info me-1"></i> Tempat, Tanggal Lahir</small>
-                <div class="fw-bold fs-6" id="modalTtl">-</div>
-              </div>
-            </div>
-            <!-- AGAMA -->
-            <div class="col-md-6">
-              <div class="biodata-item">
-                <small class="text-muted d-block mb-1"><i class="bi bi-moon-stars text-warning me-1"></i> Agama</small>
-                <div class="fw-bold fs-6" id="modalAgama">-</div>
-              </div>
-            </div>
-            <!-- NO HP -->
-            <div class="col-md-6">
-              <div class="biodata-item">
-                <small class="text-muted d-block mb-1"><i class="bi bi-whatsapp text-success me-1"></i> Nomor Kontak / WhatsApp</small>
-                <div class="fw-bold fs-6 text-success" id="modalHp">-</div>
-              </div>
-            </div>
-            <!-- NAMA AYAH -->
-            <div class="col-md-6">
-              <div class="biodata-item">
-                <small class="text-muted d-block mb-1"><i class="bi bi-person-fill text-primary me-1"></i> Nama Ayah</small>
-                <div class="fw-bold fs-6" id="modalNamaAyah">-</div>
-              </div>
-            </div>
-            <!-- NAMA IBU -->
-            <div class="col-md-6">
-              <div class="biodata-item">
-                <small class="text-muted d-block mb-1"><i class="bi bi-person-heart text-danger me-1"></i> Nama Ibu</small>
-                <div class="fw-bold fs-6" id="modalNamaIbu">-</div>
-              </div>
-            </div>
-            <!-- ALAMAT -->
-            <div class="col-12">
-              <div class="biodata-item">
-                <small class="text-muted d-block mb-1"><i class="bi bi-geo-alt-fill text-danger me-1"></i> Alamat Lengkap</small>
-                <div class="fw-semibold" id="modalAlamat">-</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer bg-light border-0 px-4 py-3">
-          <button type="button" class="btn btn-secondary rounded-3 px-4" data-bs-dismiss="modal">Tutup</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- JAVASCRIPT LOGIC & API INTEGRATION -->
   <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbye3OumdF3EuCrLd625TJvbcu_Q_NyCBE1uFrEXfLo-FsVnBLl45jYGyqmNUEnvEbk_SQ/exec"; // Masukkan URL Apps Script Anda
-
-    let globalDataSiswa = [];
-    let currentUser = null;
-    let modalBiodataBS = null;
+    let currentUser = JSON.parse(localStorage.getItem('user_156')) || null;
+    let cachedStudents = [];
 
     document.addEventListener("DOMContentLoaded", () => {
-      modalBiodataBS = new bootstrap.Modal(document.getElementById('modalBiodata'));
+      checkAuthState();
+      loadPublicEskul();
     });
 
-    function showBiodataModal(nama, nik, ttl, agama, hp, namaAyah, namaIbu, alamat) {
-      document.getElementById('modalNamaSiswa').textContent = nama;
-      document.getElementById('modalNik').textContent = nik || "-";
-      document.getElementById('modalTtl').textContent = ttl || "-";
-      document.getElementById('modalAgama').textContent = agama || "-";
-      document.getElementById('modalHp').textContent = hp || "-";
-      document.getElementById('modalNamaAyah').textContent = namaAyah || "-";
-      document.getElementById('modalNamaIbu').textContent = namaIbu || "-";
-      document.getElementById('modalAlamat').textContent = alamat || "-";
-      modalBiodataBS.show();
-    }
-
-    function togglePasswordVisibility() {
-      const pwdInput = document.getElementById('inputPassword');
-      const icon = document.getElementById('toggleIcon');
-      
-      if (pwdInput.type === 'password') {
-        pwdInput.type = 'text';
-        icon.classList.remove('bi-eye-fill');
-        icon.classList.add('bi-eye-slash-fill');
+    function toggleLoginModal(show, message = null) {
+      const modal = document.getElementById('login-modal');
+      const alertMsg = document.getElementById('alert-message');
+      if (message) {
+        alertMsg.innerText = message;
+        alertMsg.classList.remove('hidden');
       } else {
-        pwdInput.type = 'password';
-        icon.classList.remove('bi-eye-slash-fill');
-        icon.classList.add('bi-eye-fill');
+        alertMsg.classList.add('hidden');
       }
+      if (show) modal.classList.remove('hidden');
+      else modal.classList.add('hidden');
     }
 
-    function checkStrength(val) {
-      const bar = document.getElementById('strengthBar');
-      const label = document.getElementById('strengthLabel');
-      
-      if (!val) {
-        bar.style.width = '0%';
-        label.textContent = '-';
-        label.style.color = '#64748b';
-        return;
-      }
-
-      let score = 0;
-      if (val.length >= 6) score += 33;
-      if (val.match(/[0-9]/)) score += 33;
-      if (val.match(/[A-Z]/) || val.match(/[^a-zA-Z0-9]/)) score += 34;
-
-      if (score <= 33) {
-        bar.style.width = '33%';
-        bar.style.backgroundColor = '#ef4444';
-        label.textContent = 'Lemah';
-        label.style.color = '#ef4444';
-      } else if (score <= 66) {
-        bar.style.width = '66%';
-        bar.style.backgroundColor = '#f59e0b';
-        label.textContent = 'Sedang';
-        label.style.color = '#f59e0b';
+    function checkProtectedAccess() {
+      if (!currentUser) {
+        toggleLoginModal(true, "Silakan login terlebih dahulu untuk mengakses Dashboard Internal.");
       } else {
-        bar.style.width = '100%';
-        bar.style.backgroundColor = '#10b981';
-        label.textContent = 'Kuat';
-        label.style.color = '#10b981';
+        switchView('dashboard');
       }
     }
 
-    function handleLogin() {
-      const u = document.getElementById('inputUsername').value;
-      const p = document.getElementById('inputPassword').value;
-      const alertBox = document.getElementById('alertLogin');
-      
-      toggleLoading(true);
-      alertBox.classList.add('d-none');
-
-      fetch(`${API_URL}?action=login&u=${encodeURIComponent(u)}&p=${encodeURIComponent(p)}`)
-        .then(res => res.json())
-        .then(res => {
-          toggleLoading(false);
-          if (res.success) {
-            currentUser = res;
-            loadDashboard();
-          } else {
-            alertBox.textContent = res.message;
-            alertBox.classList.remove('d-none');
-          }
-        })
-        .catch(err => {
-          toggleLoading(false);
-          alertBox.textContent = "Koneksi ke Apps Script gagal. Periksa koneksi internet.";
-          alertBox.classList.remove('d-none');
-        });
-    }
-
-    function toggleLoading(isLoading) {
-      document.getElementById('btnText').textContent = isLoading ? "Memproses..." : "Masuk Sekarang";
-      document.getElementById('btnSpinner').classList.toggle('d-none', !isLoading);
-      document.getElementById('btnLogin').disabled = isLoading;
-    }
-
-    function loadDashboard() {
-      document.getElementById('sectionLogin').classList.add('d-none');
-      document.getElementById('sectionDashboard').classList.remove('d-none');
-      document.getElementById('labelNamaWalas').textContent = currentUser.nama;
-      
-      if (currentUser.role === "ADMIN") {
-        document.getElementById('labelKelas').textContent = "AKSES ADMIN";
-        document.getElementById('labelRole').textContent = "Administrator";
-        document.getElementById('filterKelasAdmin').classList.remove('d-none');
+    function switchView(viewName) {
+      const pubView = document.getElementById('view-public');
+      const dashView = document.getElementById('view-dashboard');
+      if (viewName === 'dashboard') {
+        pubView.classList.add('hidden');
+        dashView.classList.remove('hidden');
+        renderDashboardPanels();
       } else {
-        document.getElementById('labelKelas').textContent = "Kelas " + currentUser.kelas;
-        document.getElementById('labelRole').textContent = "Wali Kelas";
+        dashView.classList.add('hidden');
+        pubView.classList.remove('hidden');
       }
-
-      fetchDataSiswa();
-      document.getElementById('searchInput').addEventListener('input', applyFilter);
-      document.getElementById('filterGender').addEventListener('change', applyFilter);
     }
 
-    function fetchDataSiswa() {
-      const kelasFilterAdmin = document.getElementById('filterKelasAdmin').value;
-      fetch(`${API_URL}?action=getData&role=${currentUser.role}&kelasUser=${currentUser.kelas}&kelasFilter=${kelasFilterAdmin}`)
-        .then(res => res.json())
-        .then(data => {
-          globalDataSiswa = data;
-          document.getElementById('statTotalSiswa').textContent = data.length;
-          document.getElementById('statTotalKK').textContent = data.filter(s => s.linkKK !== "").length;
-          document.getElementById('statTotalIjazah').textContent = data.filter(s => s.linkIjazah !== "").length;
-          renderTable(globalDataSiswa);
-        });
-    }
-
-    function renderTable(dataList) {
-      const tbody = document.getElementById('tabelBody');
-      const noDataAlert = document.getElementById('noDataAlert');
-      tbody.innerHTML = "";
-
-      if (dataList.length === 0) {
-        noDataAlert.classList.remove('d-none');
-        return;
-      }
-      noDataAlert.classList.add('d-none');
-
-      dataList.forEach((siswa, index) => {
-        const tr = document.createElement("tr");
-        const btnKK = siswa.linkKK 
-          ? `<a href="${siswa.linkKK}" target="_blank" class="btn-action btn-outline-info"><i class="bi bi-file-earmark-pdf"></i> KK</a>`
-          : `<span class="btn-action btn-outline-secondary opacity-50"><i class="bi bi-dash-circle"></i> KK (-)</span>`;
-        const btnIjz = siswa.linkIjazah 
-          ? `<a href="${siswa.linkIjazah}" target="_blank" class="btn-action btn-outline-success"><i class="bi bi-file-earmark-pdf"></i> Ijazah SD</a>`
-          : `<span class="btn-action btn-outline-secondary opacity-50"><i class="bi bi-dash-circle"></i> Ijazah (-)</span>`;
-
-        // Sanitasi karakter kutip agar string JS aman
-        const namaSafe = (siswa.nama || "").replace(/'/g, "\\'");
-        const ttlSafe = (siswa.ttl || "").replace(/'/g, "\\'");
-        const agamaSafe = (siswa.agama || "").replace(/'/g, "\\'");
-        const ayahSafe = (siswa.namaAyah || "").replace(/'/g, "\\'");
-        const ibuSafe = (siswa.namaIbu || "").replace(/'/g, "\\'");
-        const alamatSafe = (siswa.alamat || "").replace(/'/g, "\\'");
-
-        tr.innerHTML = `
-          <td class="text-center text-muted">${index + 1}</td>
-          <td class="text-center"><span class="badge bg-secondary">${siswa.kelas}</span></td>
-          <td><span class="fw-bold">${siswa.nama}</span></td>
-          <td class="text-muted">${siswa.nis_nisn}</td>
-          <td class="text-center"><span class="badge ${siswa.jk === 'P' ? 'bg-danger' : 'bg-info text-dark'}">${siswa.jk}</span></td>
-          <td class="text-center">
-            <button class="btn-action btn-outline-dark" onclick="showBiodataModal('${namaSafe}', '${siswa.nik}', '${ttlSafe}', '${agamaSafe}', '${siswa.noHp}', '${ayahSafe}', '${ibuSafe}', '${alamatSafe}')">
-              <i class="bi bi-card-heading"></i> Biodata
-            </button>
-          </td>
-          <td class="text-center">${btnKK} ${btnIjz}</td>
+    function checkAuthState() {
+      const authContainer = document.getElementById('auth-action-container');
+      if (currentUser) {
+        authContainer.innerHTML = `
+          <button onclick="switchView('dashboard')" class="bg-accent hover:bg-yellow-500 text-navy font-bold px-4 py-2 rounded-lg text-sm shadow transition flex items-center space-x-2">
+            <i class="ri-dashboard-line"></i>
+            <span>Dashboard</span>
+          </button>
         `;
-        tbody.appendChild(tr);
-      });
+      } else {
+        authContainer.innerHTML = `
+          <button onclick="toggleLoginModal(true)" class="bg-accent hover:bg-yellow-500 text-navy font-bold px-4 py-2 rounded-lg text-sm shadow transition flex items-center space-x-2">
+            <i class="ri-lock-line"></i>
+            <span>Login Sistem</span>
+          </button>
+        `;
+      }
     }
 
-    function applyFilter() {
-      const searchValue = document.getElementById('searchInput').value.toLowerCase().trim();
-      const genderValue = document.getElementById('filterGender').value;
-      const filtered = globalDataSiswa.filter(siswa => {
-        const matchesSearch = siswa.nama.toLowerCase().includes(searchValue) || siswa.nis_nisn.toLowerCase().includes(searchValue) || siswa.nik.toLowerCase().includes(searchValue);
-        const matchesGender = (genderValue === "ALL") || (siswa.jk === genderValue);
-        return matchesSearch && matchesGender;
-      });
-      renderTable(filtered);
+    // --- HANDLE LOGIN KE GOOGLE APPS SCRIPT ---
+    async function handleLogin(e) {
+      e.preventDefault();
+      const username = document.getElementById('login-username').value;
+      const password = document.getElementById('login-password').value;
+      const btn = document.getElementById('login-btn');
+      
+      btn.innerText = "Memproses...";
+      btn.disabled = true;
+
+      try {
+        const response = await fetch(API_URL, {
+          method: "POST",
+          body: JSON.stringify({ action: "login", username, password })
+        });
+        const result = await response.json();
+
+        if (result.status === 'success') {
+          currentUser = result.user;
+          localStorage.setItem('user_156', JSON.stringify(currentUser));
+          toggleLoginModal(false);
+          checkAuthState();
+          switchView('dashboard');
+        } else {
+          alert(result.message || "Username atau password salah!");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Gagal terhubung ke server Google Apps Script.");
+      } finally {
+        btn.innerText = "Masuk ke Sistem";
+        btn.disabled = false;
+      }
+    }
+
+    function handleLogout() {
+      localStorage.removeItem('user_156');
+      currentUser = null;
+      checkAuthState();
+      switchView('public');
+    }
+
+    // --- RENDER DASHBOARD BERDASARKAN ROLE ---
+    function renderDashboardPanels() {
+      document.getElementById('dash-subtitle').innerText = `Login sebagai: ${currentUser.full_name} (${currentUser.role})`;
+      
+      const panelArsip = document.getElementById('panel-arsip');
+      const panelUpload = document.getElementById('panel-upload');
+
+      if (currentUser.role === 'guru_kesiswaan' || currentUser.role === 'admin') {
+        panelArsip.classList.remove('hidden');
+        panelUpload.classList.add('hidden');
+        fetchStudentData();
+      } else {
+        panelArsip.classList.add('hidden');
+        panelUpload.classList.remove('hidden');
+      }
+    }
+
+    // --- AMBIL DATA ESKUL PUBLIK ---
+    async function loadPublicEskul() {
+      try {
+        const res = await fetch(API_URL, {
+          method: "POST",
+          body: JSON.stringify({ action: "get_eskul" })
+        });
+        const json = await res.json();
+        const grid = document.getElementById('eskul-grid');
+
+        if (json.status === 'success' && json.data.length > 0) {
+          grid.innerHTML = json.data.map(item => `
+            <div class="bg-white rounded-xl shadow border border-slate-100 overflow-hidden flex flex-col justify-between">
+              <div class="p-5">
+                <span class="bg-${item.kategori === 'Wajib' ? 'red' : 'blue'}-100 text-${item.kategori === 'Wajib' ? 'red' : 'blue'}-700 font-bold text-xs px-2.5 py-0.5 rounded">${item.kategori}</span>
+                <h3 class="font-bold text-lg mt-2 text-navy">${item.nama_eskul}</h3>
+                <p class="text-xs text-slate-600 mt-1">${item.deskripsi}</p>
+                <div class="mt-4 pt-3 border-t text-xs text-slate-500 space-y-1">
+                  <p><i class="ri-user-star-line mr-1"></i> Pembina: ${item.pembina}</p>
+                  <p><i class="ri-time-line mr-1"></i> Jadwal: ${item.jadwal_latihan}</p>
+                </div>
+              </div>
+            </div>
+          `).join('');
+        }
+      } catch (e) {
+        console.error("Gagal memuat eskul:", e);
+      }
+    }
+
+    // --- AMBIL DATA ARSIP SISWA ---
+    async function fetchStudentData() {
+      const tbody = document.getElementById('student-table-body');
+      try {
+        const res = await fetch(API_URL, {
+          method: "POST",
+          body: JSON.stringify({ action: "get_students" })
+        });
+        const json = await res.json();
+        
+        if (json.status === 'success') {
+          cachedStudents = json.data;
+          renderStudentTable(cachedStudents);
+        } else {
+          tbody.innerHTML = `<tr><td colspan="8" class="p-4 text-center text-red-500">Gagal memuat data arsip.</td></tr>`;
+        }
+      } catch (e) {
+        console.error(e);
+        tbody.innerHTML = `<tr><td colspan="8" class="p-4 text-center text-red-500">Kesalahan koneksi server.</td></tr>`;
+      }
+    }
+
+    function renderStudentTable(data) {
+      const tbody = document.getElementById('student-table-body');
+      if (data.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" class="p-4 text-center text-slate-400">Tidak ada data siswa ditemukan.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = data.map(s => `
+        <tr class="border-b hover:bg-slate-50">
+          <td class="p-3 font-semibold">${s.kelas}</td>
+          <td class="p-3 font-bold text-navy">${s.nama}</td>
+          <td class="p-3">${s.nisn}</td>
+          <td class="p-3">${s.ttl}</td>
+          <td class="p-3">${s.no_hp}</td>
+          <td class="p-3 text-center">
+            ${s.link_kk && s.link_kk !== '-' ? `<a href="${s.link_kk}" target="_blank" class="text-blue-600 underline font-semibold">Buka KK</a>` : '-'}
+          </td>
+          <td class="p-3 text-center">
+            ${s.link_ijazah && s.link_ijazah !== '-' ? `<a href="${s.link_ijazah}" target="_blank" class="text-blue-600 underline font-semibold">Buka Ijazah</a>` : '-'}
+          </td>
+          <td class="p-3 text-center">
+            ${s.link_akte && s.link_akte !== '-' ? `<a href="${s.link_akte}" target="_blank" class="text-blue-600 underline font-semibold">Buka Akte</a>` : '-'}
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function filterSiswa() {
+      const keyword = document.getElementById('search-siswa').value.toLowerCase();
+      const filtered = cachedStudents.filter(s => 
+        s.nama.toLowerCase().includes(keyword) || s.nisn.toLowerCase().includes(keyword)
+      );
+      renderStudentTable(filtered);
+    }
+
+    function handleUploadSubmit(e) {
+      e.preventDefault();
+      alert("Fitur upload foto dokumentasi berhasil disimulasikan! (Hubungkan ke endpoint Google Drive API untuk penyimpanan file fisik).");
     }
   </script>
 </body>
