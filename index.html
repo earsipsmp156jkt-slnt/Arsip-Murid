@@ -47,6 +47,7 @@
         <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
           <a href="#beranda" onclick="switchView('public')" class="hover:text-accent transition-colors">Beranda</a>
           <a href="#eskul-section" onclick="switchView('public')" class="hover:text-accent transition-colors">Ekstrakurikuler</a>
+          <a href="#pembiasaan-public-section" onclick="switchView('public')" class="hover:text-accent transition-colors">Pembiasaan Pagi</a>
         </nav>
 
         <div class="flex items-center space-x-3">
@@ -64,7 +65,7 @@
   <!-- MAIN CONTAINER -->
   <main class="flex-grow">
     
-    <!-- VIEW 1: HALAMAN PUBLIK -->
+    <!-- VIEW 1: HALAMAN UTAMA / PUBLIK -->
     <div id="view-public">
       <!-- HERO & CAROUSEL SLIDER (AUTO-SWIPE 5 DETIK) -->
       <section id="beranda" class="bg-gradient-to-r from-navy via-primary to-blue-900 text-white py-16 px-4 sm:px-6 lg:px-8">
@@ -73,7 +74,7 @@
             <span class="bg-accent/20 text-accent font-semibold px-3 py-1 rounded-full text-xs uppercase tracking-wider">Karakter & Disiplin</span>
             <h2 class="text-3xl sm:text-4xl font-extrabold mt-3 leading-tight">Mewujudkan Generasi Unggul, Berbudaya, & Berprestasi</h2>
             <p class="mt-4 text-blue-100 text-sm leading-relaxed">
-              Portal Kesiswaan resmi SMPN 156 Jakarta pusat informasi kegiatan ekstrakurikuler, pembiasaan pagi, galeri dokumentasi, dan rekam jejak peserta didik.
+              Portal Kesiswaan resmi SMPN 156 Jakarta pusat informasi kegiatan ekstrakurikuler, galeri dokumentasi, pembiasaan pagi, dan rekam jejak peserta didik.
             </p>
             <div class="mt-6 flex flex-wrap gap-4">
               <a href="#eskul-section" class="bg-white text-navy font-bold px-5 py-2.5 rounded-lg text-sm shadow hover:bg-slate-100 transition">Jelajahi Eskul</a>
@@ -97,19 +98,33 @@
         </div>
       </section>
 
-      <!-- EKSTRAKURIKULER SECTION -->
+      <!-- EKSTRAKURIKULER SECTION (KLIK UNTUK LIHAT DOKUMENTASI) -->
       <section id="eskul-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div class="text-center mb-10">
           <h2 class="text-2xl font-bold text-navy">Ekstrakurikuler Sekolah</h2>
-          <p class="text-sm text-slate-500 mt-1">Wadah pengembangan bakat dan minat peserta didik</p>
+          <p class="text-sm text-slate-500 mt-1">Klik pada salah satu ekstrakurikuler untuk melihat jadwal, pembina, dan dokumentasi fotonya</p>
         </div>
         <div id="eskul-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div class="bg-white p-6 rounded-xl shadow border col-span-3 text-center text-slate-500">Memuat data ekstrakurikuler...</div>
         </div>
       </section>
+
+      <!-- PEMBIASAAN PAGI SECTION (DI HALAMAN UTAMA) -->
+      <section id="pembiasaan-public-section" class="bg-slate-100 py-16 px-4 sm:px-6 lg:px-8 border-t">
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-10">
+            <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Program Kesiswaan</span>
+            <h2 class="text-2xl font-bold text-navy mt-2">Jadwal & Dokumentasi Pembiasaan Pagi</h2>
+            <p class="text-sm text-slate-500 mt-1">Pembiasaan rutin harian peserta didik SMPN 156 Jakarta</p>
+          </div>
+          <div id="pembiasaan-public-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border col-span-2 text-center text-slate-400">Memuat pembiasaan pagi...</div>
+          </div>
+        </div>
+      </section>
     </div>
 
-    <!-- VIEW 2: DASHBOARD INTERNAL TERPROTEKSI (ROLE-BASED TABS) -->
+    <!-- VIEW 2: DASHBOARD INTERNAL TERPROTEKSI -->
     <div id="view-dashboard" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div class="bg-white p-6 rounded-2xl shadow-sm border mb-6 flex flex-col md:flex-row justify-between items-center gap-4">
         <div>
@@ -207,7 +222,7 @@
         </form>
       </div>
 
-      <!-- TAB 4: DATA PRESTASI -->
+      <!-- TAB 4: DATA PRESTASI (ADMIN) -->
       <div id="tab-content-prestasi" class="hidden space-y-6">
         <div class="bg-white p-6 rounded-2xl shadow-sm border flex justify-between items-center">
           <h3 class="font-bold text-base text-navy flex items-center space-x-2"><i class="ri-trophy-line text-accent"></i><span>Daftar Prestasi Siswa & Sekolah</span></h3>
@@ -227,19 +242,29 @@
         </div>
       </div>
 
-      <!-- TAB 5: PEMBIASAAN PAGI -->
+      <!-- TAB 5: PEMBIASAAN PAGI (ADMIN/PENGELOLA) -->
       <div id="tab-content-pembiasaan" class="hidden space-y-6">
         <div class="bg-white p-6 rounded-2xl shadow-sm border flex justify-between items-center">
-          <div><h3 class="font-bold text-base text-navy flex items-center space-x-2"><i class="ri-calendar-check-line text-primary"><span>Jadwal & Dokumentasi Pembiasaan Pagi</span></h3><p class="text-xs text-slate-500 mt-1">Upacara, Senam, Literasi, Asmaul Husna, dan Jumat Bersih.</p></div>
+          <div><h3 class="font-bold text-base text-navy flex items-center space-x-2"><i class="ri-calendar-check-line text-primary"><span>Kelola Jadwal & Dokumentasi Pembiasaan Pagi</span></h3><p class="text-xs text-slate-500 mt-1">Tambah dokumentasi yang akan tampil di halaman publik.</p></div>
           <button onclick="toggleModalPembiasaan(true)" class="bg-primary text-white font-bold px-4 py-2 rounded-xl text-xs shadow hover:bg-blue-900 transition">+ Upload Dokumentasi</button>
         </div>
-        <div id="pembiasaan-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="bg-white p-6 rounded-2xl shadow-sm border col-span-2 text-center text-slate-400">Memuat jadwal dan dokumentasi pembiasaan pagi...</div>
+        <div id="pembiasaan-admin-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-2xl shadow-sm border col-span-2 text-center text-slate-400">Memuat pembiasaan pagi...</div>
         </div>
       </div>
 
     </div>
   </main>
+
+  <!-- MODAL DETAIL DOKUMENTASI ESKUL (KETIKA ESKUL DIKLIK) -->
+  <div id="modal-eskul-detail" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden p-6 relative max-h-[90vh] overflow-y-auto">
+      <button onclick="toggleEskulDetailModal(false)" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-xl"><i class="ri-close-line"></i></button>
+      <div id="eskul-detail-content">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+  </div>
 
   <!-- MODALS -->
   <div id="modal-prestasi" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
@@ -308,6 +333,8 @@
     let currentUser = JSON.parse(localStorage.getItem('user_156')) || null;
     let cachedStudents = [];
     let galeriSlides = [];
+    let allEskulData = [];
+    let allGaleriData = [];
     let currentSlideIndex = 0;
     let slideInterval = null;
 
@@ -315,6 +342,7 @@
       checkAuthState();
       loadPublicEskul();
       loadGaleriSlider();
+      loadPublicPembiasaan();
     });
 
     async function loadGaleriSlider() {
@@ -322,6 +350,7 @@
         const res = await fetch(API_URL, { method: "POST", body: JSON.stringify({ action: "get_galeri" }) });
         const json = await res.json();
         if (json.status === 'success' && json.data.length > 0) {
+          allGaleriData = json.data;
           galeriSlides = json.data;
           renderSlider();
           startAutoSwipe();
@@ -353,6 +382,106 @@
       }, 5000);
     }
 
+    // --- LOAD PEMBIASAAN PAGI DI HALAMAN UTAMA ---
+    async function loadPublicPembiasaan() {
+      try {
+        const res = await fetch(API_URL, { method: "POST", body: JSON.stringify({ action: "get_pembiasaan" }) });
+        const json = await res.json();
+        const grid = document.getElementById('pembiasaan-public-grid');
+        if (json.status === 'success' && json.data.length > 0) {
+          grid.innerHTML = json.data.map(item => `
+            <div class="bg-white rounded-2xl shadow-sm border p-6 flex flex-col justify-between">
+              <div>
+                <span class="bg-emerald-50 text-emerald-700 font-bold text-xs px-2.5 py-1 rounded-full">${item.tanggal}</span>
+                <h4 class="font-bold text-base text-navy mt-3">${item.kegiatan}</h4>
+                <p class="text-xs text-slate-600 mt-1 leading-relaxed">${item.keterangan || 'Kegiatan pembiasaan pagi rutin peserta didik.'}</p>
+              </div>
+              ${item.foto ? `<div class="mt-4 h-48 rounded-xl overflow-hidden bg-slate-100"><img src="${item.foto}" class="w-full h-full object-cover"></div>` : ''}
+            </div>
+          `).join('');
+        } else {
+          grid.innerHTML = `<div class="bg-white p-6 rounded-2xl shadow-sm border col-span-2 text-center text-slate-400">Belum ada dokumentasi pembiasaan pagi yang dipublikasikan.</div>`;
+        }
+      } catch (e) { console.error(e); }
+    }
+
+    // --- KLIK ESKUL UNTUK MELIHAT DOKUMENTASI ---
+    async function loadPublicEskul() {
+      try {
+        const resEskul = await fetch(API_URL, { method: "POST", body: JSON.stringify({ action: "get_eskul" }) });
+        const jsonEskul = await resEskul.json();
+        
+        // Ambil juga galeri foto untuk pencocokan dokumentasi per eskul
+        const resGaleri = await fetch(API_URL, { method: "POST", body: JSON.stringify({ action: "get_galeri" }) });
+        const jsonGaleri = await resGaleri.json();
+        allGaleriData = (jsonGaleri.status === 'success') ? jsonGaleri.data : [];
+
+        const grid = document.getElementById('eskul-grid');
+        if (jsonEskul.status === 'success' && jsonEskul.data.length > 0) {
+          allEskulData = jsonEskul.data;
+          grid.innerHTML = allEskulData.map(item => `
+            <div onclick='openEskulDetail(${JSON.stringify(item)})' class="bg-white rounded-2xl shadow-sm border p-6 flex flex-col justify-between cursor-pointer hover:shadow-md hover:border-primary transition group">
+              <div>
+                <span class="bg-blue-100 text-blue-700 font-bold text-xs px-2.5 py-1 rounded-full">${item.kategori}</span>
+                <h3 class="font-bold text-lg mt-3 text-navy group-hover:text-primary transition">${item.nama_eskul}</h3>
+                <p class="text-xs text-slate-600 mt-2 line-clamp-2">${item.deskripsi}</p>
+              </div>
+              <div class="mt-6 pt-4 border-t text-xs text-slate-500 space-y-1">
+                <p><i class="ri-user-star-line mr-1 text-primary"></i> Pembina: ${item.pembina}</p>
+                <p><i class="ri-time-line mr-1 text-primary"></i> Jadwal: ${item.jadwal_latihan}</p>
+                <p class="text-primary font-semibold mt-2 pt-1 flex items-center"><i class="ri-image-line mr-1"></i> Klik untuk lihat dokumentasi foto &rarr;</p>
+              </div>
+            </div>
+          `).join('');
+        }
+      } catch (e) { console.error(e); }
+    }
+
+    function openEskulDetail(eskul) {
+      // Filter foto galeri yang kategorinya cocok dengan nama eskul
+      const filteredPhotos = allGaleriData.filter(g => 
+        (g.keterangan && g.keterangan.toLowerCase().includes(eskul.nama_eskul.toLowerCase())) ||
+        (g.judul && g.judul.toLowerCase().includes(eskul.nama_eskul.toLowerCase()))
+      );
+
+      const content = document.getElementById('eskul-detail-content');
+      content.innerHTML = `
+        <span class="bg-blue-100 text-blue-700 font-bold text-xs px-2.5 py-1 rounded-full">${eskul.kategori}</span>
+        <h3 class="text-xl font-bold text-navy mt-2">${eskul.nama_eskul}</h3>
+        <p class="text-xs text-slate-600 mt-2 leading-relaxed">${eskul.deskripsi}</p>
+        
+        <div class="mt-4 pt-3 border-t text-xs text-slate-500 grid grid-cols-2 gap-2">
+          <p><strong>Pembina:</strong> ${eskul.pembina}</p>
+          <p><strong>Jadwal Latihan:</strong> ${eskul.jadwal_latihan}</p>
+        </div>
+
+        <h4 class="font-bold text-sm text-navy mt-6 mb-3 flex items-center"><i class="ri-gallery-line text-primary mr-1"></i> Dokumentasi Kegiatan</h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-64 overflow-y-auto">
+          ${filteredPhotos.length > 0 ? filteredPhotos.map(p => `
+            <div class="bg-slate-50 p-2 rounded-xl border">
+              <img src="${p.image_url}" class="w-full h-32 object-cover rounded-lg mb-2">
+              <p class="font-bold text-xs text-navy">${p.judul}</p>
+              <p class="text-[10px] text-slate-400">${p.tanggal || ''}</p>
+            </div>
+          `).join('') : `
+            <div class="col-span-2 text-center text-slate-400 py-6 text-xs bg-slate-50 rounded-xl border">
+              Belum ada dokumentasi foto khusus untuk ekstrakurikuler ini. (Menampilkan galeri umum)
+              <div class="grid grid-cols-2 gap-2 mt-3">
+                ${allGaleriData.slice(0, 2).map(p => `<img src="${p.image_url}" class="w-full h-24 object-cover rounded-lg">`).join('')}
+              </div>
+            </div>
+          `}
+        </div>
+      `;
+      document.getElementById('modal-eskul-detail').classList.remove('hidden');
+    }
+
+    function toggleEskulDetailModal(show) {
+      if (show) document.getElementById('modal-eskul-detail').classList.remove('hidden');
+      else document.getElementById('modal-eskul-detail').classList.add('hidden');
+    }
+
+    // --- AUTH & VIEW CONTROLS ---
     function toggleLoginModal(show, message = null) {
       const modal = document.getElementById('login-modal');
       const alertMsg = document.getElementById('alert-message');
@@ -426,7 +555,7 @@
           <button onclick="switchTab('arsip')" id="tab-btn-arsip" class="bg-primary text-white font-semibold px-4 py-2 rounded-xl text-xs transition flex items-center space-x-2 shadow"><i class="ri-folder-user-line"></i><span>Arsip & Data Siswa</span></button>
           <button onclick="switchTab('poin')" id="tab-btn-poin" class="bg-white hover:bg-slate-100 text-slate-700 font-semibold px-4 py-2 rounded-xl text-xs transition flex items-center space-x-2 border"><i class="ri-award-line"></i><span>Kelola Poin Siswa</span></button>
           <button onclick="switchTab('prestasi')" id="tab-btn-prestasi" class="bg-white hover:bg-slate-100 text-slate-700 font-semibold px-4 py-2 rounded-xl text-xs transition flex items-center space-x-2 border"><i class="ri-trophy-line"></i><span>Data Prestasi</span></button>
-          <button onclick="switchTab('pembiasaan')" id="tab-btn-pembiasaan" class="bg-white hover:bg-slate-100 text-slate-700 font-semibold px-4 py-2 rounded-xl text-xs transition flex items-center space-x-2 border"><i class="ri-calendar-check-line"></i><span>Pembiasaan Pagi</span></button>
+          <button onclick="switchTab('pembiasaan')" id="tab-btn-pembiasaan" class="bg-white hover:bg-slate-100 text-slate-700 font-semibold px-4 py-2 rounded-xl text-xs transition flex items-center space-x-2 border"><i class="ri-calendar-check-line"></i><span>Kelola Pembiasaan</span></button>
         `;
         switchTab('arsip');
         fetchStudentData();
@@ -434,12 +563,12 @@
         tabsContainer.innerHTML = `
           <button onclick="switchTab('upload')" id="tab-btn-upload" class="bg-primary text-white font-semibold px-4 py-2 rounded-xl text-xs transition flex items-center space-x-2 shadow"><i class="ri-image-add-line"></i><span>Upload Foto Eskul</span></button>
           <button onclick="switchTab('prestasi')" id="tab-btn-prestasi" class="bg-white hover:bg-slate-100 text-slate-700 font-semibold px-4 py-2 rounded-xl text-xs transition flex items-center space-x-2 border"><i class="ri-trophy-line"></i><span>Data Prestasi</span></button>
-          <button onclick="switchTab('pembiasaan')" id="tab-btn-pembiasaan" class="bg-white hover:bg-slate-100 text-slate-700 font-semibold px-4 py-2 rounded-xl text-xs transition flex items-center space-x-2 border"><i class="ri-calendar-check-line"></i><span>Pembiasaan Pagi</span></button>
+          <button onclick="switchTab('pembiasaan')" id="tab-btn-pembiasaan" class="bg-white hover:bg-slate-100 text-slate-700 font-semibold px-4 py-2 rounded-xl text-xs transition flex items-center space-x-2 border"><i class="ri-calendar-check-line"></i><span>Kelola Pembiasaan</span></button>
         `;
         switchTab('upload');
       }
       loadPrestasiData();
-      loadPembiasaanData();
+      loadPembiasaanAdminData();
     }
 
     function switchTab(tabName) {
@@ -563,7 +692,7 @@
           })
         });
         const json = await res.json();
-        if (json.status === 'success') { alert("Foto kegiatan eskul berhasil diunggah ke galeri publik!"); e.target.reset(); loadGaleriSlider(); }
+        if (json.status === 'success') { alert("Foto kegiatan eskul berhasil diunggah ke galeri publik!"); e.target.reset(); loadGaleriSlider(); loadPublicEskul(); }
         else { alert("Gagal mengunggah foto."); }
       } catch (err) { alert("Kesalahan koneksi."); }
     }
@@ -621,23 +750,23 @@
     }
 
     function toggleModalPembiasaan(show) { if (show) document.getElementById('modal-pembiasaan').classList.remove('hidden'); else document.getElementById('modal-pembiasaan').classList.add('hidden'); }
-    async function loadPembiasaanData() {
+    async function loadPembiasaanAdminData() {
       try {
         const res = await fetch(API_URL, { method: "POST", body: JSON.stringify({ action: "get_pembiasaan" }) });
         const json = await res.json();
-        const grid = document.getElementById('pembiasaan-grid');
+        const grid = document.getElementById('pembiasaan-admin-grid');
         if (json.status === 'success' && json.data.length > 0) {
           grid.innerHTML = json.data.map(item => `
             <div class="bg-white rounded-2xl shadow-sm border p-5 flex flex-col justify-between">
               <div>
                 <span class="bg-emerald-50 text-emerald-700 font-bold text-xs px-2.5 py-1 rounded-full">${item.tanggal}</span>
                 <h4 class="font-bold text-base text-navy mt-2">${item.kegiatan}</h4>
-                <p class="text-xs text-slate-600 mt-1">${item.keterangan || 'Kegiatan pembiasaan pagi rutin siswa.'}</p>
+                <p class="text-xs text-slate-600 mt-1">${item.keterangan || '-'}</p>
               </div>
-              ${item.foto ? `<div class="mt-4 h-40 rounded-xl overflow-hidden bg-slate-100"><img src="${item.foto}" class="w-full h-full object-cover"></div>` : ''}
+              ${item.foto ? `<div class="mt-4 h-32 rounded-xl overflow-hidden bg-slate-100"><img src="${item.foto}" class="w-full h-full object-cover"></div>` : ''}
             </div>
           `).join('');
-        } else { grid.innerHTML = `<div class="bg-white p-6 rounded-2xl shadow-sm border col-span-2 text-center text-slate-400">Belum ada dokumentasi pembiasaan pagi.</div>`; }
+        } else { grid.innerHTML = `<div class="bg-white p-6 rounded-2xl shadow-sm border col-span-2 text-center text-slate-400">Belum ada dokumentasi.</div>`; }
       } catch (e) { console.error(e); }
     }
     async function handleSimpanPembiasaan(e) {
@@ -654,31 +783,8 @@
           })
         });
         const json = await res.json();
-        if (json.status === 'success') { alert("Dokumentasi pembiasaan berhasil disimpan!"); toggleModalPembiasaan(false); e.target.reset(); loadPembiasaanData(); }
+        if (json.status === 'success') { alert("Dokumentasi pembiasaan berhasil disimpan & dipublikasikan!"); toggleModalPembiasaan(false); e.target.reset(); loadPembiasaanAdminData(); loadPublicPembiasaan(); }
       } catch (err) { alert("Kesalahan koneksi."); }
-    }
-
-    async function loadPublicEskul() {
-      try {
-        const res = await fetch(API_URL, { method: "POST", body: JSON.stringify({ action: "get_eskul" }) });
-        const json = await res.json();
-        const grid = document.getElementById('eskul-grid');
-        if (json.status === 'success' && json.data.length > 0) {
-          grid.innerHTML = json.data.map(item => `
-            <div class="bg-white rounded-2xl shadow-sm border p-6 flex flex-col justify-between">
-              <div>
-                <span class="bg-blue-100 text-blue-700 font-bold text-xs px-2.5 py-1 rounded-full">${item.kategori}</span>
-                <h3 class="font-bold text-lg mt-3 text-navy">${item.nama_eskul}</h3>
-                <p class="text-xs text-slate-600 mt-2">${item.deskripsi}</p>
-              </div>
-              <div class="mt-6 pt-4 border-t text-xs text-slate-500 space-y-1">
-                <p><i class="ri-user-star-line mr-1 text-primary"></i> Pembina: ${item.pembina}</p>
-                <p><i class="ri-time-line mr-1 text-primary"></i> Jadwal: ${item.jadwal_latihan}</p>
-              </div>
-            </div>
-          `).join('');
-        }
-      } catch (e) { console.error(e); }
     }
   </script>
 </body>
