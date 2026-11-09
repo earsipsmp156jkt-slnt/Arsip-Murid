@@ -333,18 +333,23 @@
       switchView('public');
     }
 
-    // --- RENDER DASHBOARD BERDASARKAN ROLE ---
+    // --- RENDER DASHBOARD BERDASARKAN ROLE (DIPERBAIKI) ---
     function renderDashboardPanels() {
       document.getElementById('dash-subtitle').innerText = `Login sebagai: ${currentUser.full_name} (${currentUser.role})`;
       
       const panelArsip = document.getElementById('panel-arsip');
       const panelUpload = document.getElementById('panel-upload');
 
-      if (currentUser.role === 'guru_kesiswaan' || currentUser.role === 'admin') {
+      // Ubah role ke huruf kecil agar aman dari perbedaan kapitalisasi, dan cek kata kunci
+      const userRole = (currentUser.role || "").toLowerCase();
+
+      // Jika role mengandung kata 'admin', 'kesiswaan', atau 'guru', tampilkan Arsip Siswa
+      if (userRole.includes('admin') || userRole.includes('kesiswaan') || userRole.includes('guru')) {
         panelArsip.classList.remove('hidden');
         panelUpload.classList.add('hidden');
         fetchStudentData();
       } else {
+        // Jika pembina eskul / osis, tampilkan menu upload
         panelArsip.classList.add('hidden');
         panelUpload.classList.remove('hidden');
       }
